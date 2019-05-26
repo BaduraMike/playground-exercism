@@ -1,0 +1,15 @@
+**/.idea/
+
+**/.exercism/
+
+**/.gradle/
+
+**/build/
+
+**/out/
+
+**/*.gradle
+
+**/*.iml
+
+
