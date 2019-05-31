@@ -1,14 +1,15 @@
+import java.util.Optional;
+
 class Twofer {
     String twofer(String name) {
-        StringBuilder sB = new StringBuilder();
+        Optional<String> stringOptional = Optional.ofNullable(name);
+        String personToPrint;
 
-        if (name == null || name.isEmpty()) {
-            sB.append("One for you, one for me.");
+        if (!stringOptional.isPresent() || stringOptional.equals(Optional.of(""))) {
+            personToPrint = "you";
         } else {
-            sB.append("One for ")
-                    .append(name)
-                    .append(", one for me.");
+            personToPrint = name;
         }
-        return sB.toString();
+        return String.format("One for %s, one for me.", personToPrint);
     }
 }
