@@ -1,11 +1,12 @@
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 class ReverseString {
 
     String reverse(String inputString) {
-        StringBuilder sB = new StringBuilder();
-
-        for (int i = 0; i < inputString.length(); i++) {
-            sB.append(inputString.charAt(inputString.length() - 1 - i));
-        }
-        return sB.toString();
+        return IntStream.range(0, inputString.length())
+                .mapToObj(x -> inputString.charAt((inputString.length() - 1) - x))
+                .map(character -> String.valueOf(character))
+                .collect(Collectors.joining(""));
     }
 }
