@@ -6,17 +6,9 @@ import java.util.Map;
 class ProteinTranslator {
 
     List<String> translate(String rnaSequence) {
-        List<String> codons = new ArrayList<>();
+        List<String> proteinList = new ArrayList<>();
         char[] chars = rnaSequence.toCharArray();
         StringBuilder sB = new StringBuilder();
-
-        for (int i = 0; i < rnaSequence.length(); i++) {
-            sB.append(chars[i]);
-            if (sB.length() == 3) {
-                codons.add(sB.toString());
-                sB.setLength(0);
-            }
-        }
 
         Map<String, String> proteinsMap = new HashMap<>();
         proteinsMap.put("AUG", "Methionine");
@@ -37,15 +29,16 @@ class ProteinTranslator {
         proteinsMap.put("UAG", "STOP");
         proteinsMap.put("UGA", "STOP");
 
-        List<String> proteinList = new ArrayList<>();
-
-        for (String str : codons) {
-            if (proteinsMap.get(str).equals("STOP")) {
-                break;
+        for (int i = 0; i < rnaSequence.length(); i++) {
+            sB.append(chars[i]);
+            if (sB.length() == 3) {
+                if (proteinsMap.get(sB.toString()).equals("STOP")) {
+                    break;
+                }
+                proteinList.add(proteinsMap.get(sB.toString()));
+                sB.setLength(0);
             }
-            proteinList.add(proteinsMap.get(str));
         }
-
         return proteinList;
     }
 }
