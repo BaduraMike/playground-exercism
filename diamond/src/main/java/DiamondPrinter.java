@@ -10,16 +10,16 @@ class DiamondPrinter {
         StringBuilder sB = new StringBuilder();
 
         for (int i = 0; i < (a - 64); i++) {
-            sB.append(edgeSpaces(a, i));
+            sB.append(outerSpaces(a, i));
 
             sB.append((char) (i + 65));
 
             if (a != 65 && i != 0) {
-                sB.append(middleSpaces(i));
+                sB.append(innerSpaces(i));
                 sB.append((char) (i + 65));
             }
 
-            sB.append(edgeSpaces(a, i));
+            sB.append(outerSpaces(a, i));
 
             diamondList.add(sB.toString());
             sB.setLength(0);
@@ -32,7 +32,7 @@ class DiamondPrinter {
         return diamondList;
     }
 
-    private String edgeSpaces(char a, int i) {
+    private String outerSpaces(char a, int i) {
         StringBuilder sB = new StringBuilder();
 
         for (int j = 0; j < (a - 64 - 1) - i; j++) {
@@ -41,20 +41,15 @@ class DiamondPrinter {
         return sB.toString();
     }
 
-    private String middleSpaces(int i) {
+    private String innerSpaces(int i) {
         StringBuilder sB = new StringBuilder();
-        int spacesCount = 0;
 
         if (i == 1) {
             sB.append(SPACER);
             return sB.toString();
-        } else if (i == 2) {
-            spacesCount = 3;
-        } else if (i > 2) {
-            spacesCount = 2 * i - 1;
-        }
-        for (int j = 0; j < spacesCount; j++) {
-            sB.append(SPACER);
+        } else if (i > 1) {
+            for (int j = 0; j < 2 * i - 1; j++)
+                sB.append(SPACER);
         }
         return sB.toString();
     }
